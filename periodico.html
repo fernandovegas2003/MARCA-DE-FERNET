@@ -141,7 +141,7 @@
         
         <div class="text-slate-300 text-lg md:text-xl leading-relaxed space-y-8 text-justify reveal">
             <p class="drop-cap">
-                Nadie lo veía venir. Nadie. Ni los analistas europeos que opinaban con total seguridad desde sus programas, ni los exfutbolistas que creen que el fútbol se juega con pizarras y no con corazón, ni siquiera muchos hinchas argentinos que empezaron este Mundial con el alma cansada, más con miedo que con fe. Todo empezó torcido, como si el destino quisiera ponernos otra vez en el lugar que más conocemos: el sufrimiento.
+                Nadie lo veía venir, Nadie. Ni los analistas europeos que opinaban con total seguridad desde sus programas, ni los exfutbolistas que creen que el fútbol se juega con pizarras y no con corazón, ni siquiera muchos hinchas argentinos que empezaron este Mundial con el alma cansada, más con miedo que con fe. Todo empezó torcido, como si el destino quisiera ponernos otra vez en el lugar que más conocemos: el sufrimiento.
             </p>
             <p>
                 El sorteo nos metió en el famoso grupo de la muerte, esa etiqueta que parece inventada especialmente para nosotros, junto a Portugal, México y Marruecos. Un grupo para temblar, para rezar, para agarrarse la cabeza. Un grupo “Para morirse”.
@@ -572,10 +572,10 @@
                     <p class="mb-4 text-slate-500 text-sm uppercase font-bold">Luis de la Fuente (DT España) lo dijo todo:</p>
                     <p class="text-white font-serif">“Argentina no era favorita porque Scaloni no renovó el plantel y llevó casi a los mismos del 2022… pero estos tipos tienen algo que no se entrena”.</p>
                 </div>
-                
-                <p class="text-2xl md:text-3xl font-black text-sky-400 newspaper-font uppercase tracking-wide pt-12 border-t border-slate-800">
-                    Y así se escribió la hazaña más argentina de la historia del fútbol.
-                </p>
+            <p class="text-2xl md:text-3xl font-black text-sky-400 newspaper-font uppercase tracking-wide pt-12 border-t border-slate-800">
+                Así se escribió el triunfo de la selección más grande de la historia del fútbol.
+            </p>
+
             </div>
         </div>
     </section>
@@ -642,6 +642,7 @@
     </script>
 </body>
 </html>
+
 <script>
     // Cargar API de YouTube
     var tag = document.createElement('script');
@@ -650,7 +651,8 @@
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     var player;
-    var isMuted = false;
+    var isPlaying = false;
+    var autoStartOnReady = false;
 
     // API lista → crea reproductor oculto
     function onYouTubeIframeAPIReady() {
@@ -673,7 +675,13 @@
     }
 
     function onPlayerReady(event) {
-        // El reproductor está listo, pero no puede reproducir aún
+        // Si el usuario ya hizo clic en "Comenzar Lectura" antes de que el player estuviera listo
+        if (autoStartOnReady) {
+            player.setVolume(50);
+            player.playVideo();
+            isPlaying = true;
+            updateMusicIcons();
+        }
     }
 
     // ---- INICIAR EXPERIENCIA ----
@@ -693,34 +701,48 @@
 
         }, 1000);
 
-        // Reproducir música (muted autoplay → permitido en Render)
-        setTimeout(() => {
-            if (player && player.playVideo) {
-                player.mute();        // OBLIGATORIO PARA PERMITIR AUTOPLAY
-                player.setVolume(30); // Volumen cuando lo desmutees
-                player.playVideo();   // Ahora sí reproduce
-                isMuted = true;       // Estado actual: está silenciado
-            }
-        }, 300); // Delay evita bloqueos en Render
+        // Intentar reproducir música directamente con el clic del usuario
+        if (player && player.playVideo) {
+            player.setVolume(50);
+            player.playVideo();
+            isPlaying = true;
+            updateMusicIcons();
+        } else {
+            // Si todavía no está listo el player, marcamos que debe comenzar cuando lo esté
+            autoStartOnReady = true;
+        }
     }
 
-    // ---- BOTÓN PARA ACTIVAR/DESACTIVAR SONIDO ----
-    function toggleAudio() {
+    // Actualizar iconos del botón (play/pause)
+    function updateMusicIcons() {
         const iconOn = document.getElementById('icon-on');
         const iconOff = document.getElementById('icon-off');
 
-        if (isMuted) {
-            // Activar sonido
-            player.unMute();
-            iconOn.classList.remove('hidden');
+        if (!iconOn || !iconOff) return;
+
+        if (isPlaying) {
+            iconOn.classList.remove('hidden'); // icono "sonando"
             iconOff.classList.add('hidden');
-            isMuted = false;
         } else {
-            // Silenciar sonido
-            player.mute();
             iconOn.classList.add('hidden');
-            iconOff.classList.remove('hidden');
-            isMuted = true;
+            iconOff.classList.remove('hidden'); // icono "en pausa"
         }
+    }
+
+    // ---- BOTÓN PARA PAUSAR/CONTINUAR AUDIO ----
+    function toggleAudio() {
+        if (!player || !player.playVideo) return;
+
+        if (isPlaying) {
+            // Pausar música
+            player.pauseVideo();
+            isPlaying = false;
+        } else {
+            // Reanudar música
+            player.playVideo();
+            isPlaying = true;
+        }
+
+        updateMusicIcons();
     }
 </script>
