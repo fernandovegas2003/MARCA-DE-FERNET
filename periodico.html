@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARGENTINA 2026 • Crónica Histórica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CONFIGURACIÓN MAESTRA --- */
+        :root {
+            --gold: #fbbf24;
+            --sky: #38bdf8;
+            --dark: #020617;
+            --paper: #f8fafc;
+        }
+      
+
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Barra de Progreso */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sky), var(--gold));
+            z-index: 100;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .newspaper-font { font-family: 'Playfair Display', serif; }
+        .text-gold { color: var(--gold); }
+        .border-gold { border-color: var(--gold); }
+
+        /* Letra Capital Premium */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            line-height: 4.5rem;
+            padding-right: 16px;
+            padding-top: 8px;
+            font-weight: 900;
+            color: var(--sky);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+
+        /* Tarjetas con Efecto Glassmorphism */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Caja de Citas Periodística */
+        .quote-box {
+            position: relative;
+            background: linear-gradient(to right, rgba(251, 191, 36, 0.05), transparent);
+            border-left: 4px solid var(--gold);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Animación de entrada suave */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Animación de Confeti CSS Puro (Formas geométricas, no emojis) */
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold);
+            animation: fall linear forwards;
+            opacity: 0;
+            z-index: 50;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-black">
+
+    <div id="progress-bar"></div>
+
+    <header class="h-screen flex flex-col justify-center items-center text-center p-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 transform scale-105" style="filter: grayscale(100%) contrast(120%);"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"></div>
+        
+        <div class="z-10 max-w-7xl mx-auto reveal active">
+            <div class="inline-flex items-center gap-2 border border-sky-500/30 bg-sky-950/30 px-4 py-1.5 rounded-full mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <p class="text-sky-300 tracking-[0.2em] uppercase text-xs font-bold">Crónica Deportiva</p>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl lg:text-[9rem] font-black text-white mb-2 leading-[0.85] newspaper-font tracking-tighter mix-blend-screen">
+                ARGENTINA<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-sky-300 drop-shadow-[0_0_35px_rgba(56,189,248,0.5)]">CAMPEÓN 2026</span>
+            </h1>
+            
+            <div class="flex items-center justify-center gap-4 my-8 opacity-80">
+                <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+                <span class="text-gold font-serif italic text-lg">Pirámide Normal</span>
+                <div class="h-[1px] w-24 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+            </div>
+
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-4xl mx-auto newspaper-font italic leading-relaxed">
+                "Nadie lo veía venir ,Nadie."
+            </p>
+        </div>
+    </header>
+
+    <section class="max-w-4xl mx-auto py-32 px-6 relative z-10">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 border-b border-slate-800 pb-8 newspaper-font reveal">
+            El Comienzo
+        </h2>
+        
+        <div class="text-slate-300 text-lg md:text-xl leading-relaxed space-y-8 text-justify reveal">
+            <p class="drop-cap">
+                Nadie lo veía venir. Nadie. Ni los analistas europeos que opinaban con total seguridad desde sus programas, ni los exfutbolistas que creen que el fútbol se juega con pizarras y no con corazón, ni siquiera muchos hinchas argentinos que empezaron este Mundial con el alma cansada, más con miedo que con fe. Todo empezó torcido, como si el destino quisiera ponernos otra vez en el lugar que más conocemos: el sufrimiento.
+            </p>
+            <p>
+                El sorteo nos metió en el famoso grupo de la muerte, esa etiqueta que parece inventada especialmente para nosotros, junto a Portugal, México y Marruecos. Un grupo para temblar, para rezar, para agarrarse la cabeza. Un grupo “Para morirse”.
+            </p>
+            
+            <div class="quote-box">
+                <p class="text-2xl text-white newspaper-font italic">
+                    “Bueno, será lo que Dios quiera”, se escuchaba en cada esquina del país, y también ese clásico: “Viste cómo somos, siempre arrancamos complicados”.
+                </p>
+            </div>
+
+            <p class="text-center font-bold text-white tracking-wide uppercase text-sm border-t border-b border-slate-800 py-4">
+                En Argentina no sabemos de caminos fáciles; sabemos de épicas.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24 bg-slate-900 border-t border-slate-800 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-end gap-4 mb-20 reveal">
+                <h3 class="text-6xl md:text-8xl font-black text-slate-800 newspaper-font leading-none select-none">GRUPOS</h3>
+                <span class="text-sky-400 uppercase tracking-widest font-bold text-sm mb-2 border-b-2 border-sky-400 pb-1">El Sufrimiento</span>
+            </div>
+            
+            <article class="glass-card p-8 md:p-12 rounded-3xl mb-20 reveal relative overflow-hidden group">
+                <div class="relative z-10 flex flex-col md:flex-row gap-12">
+                    <div class="md:w-1/3 border-r border-slate-800 pr-8 hidden md:block text-right">
+                        <span class="text-8xl font-black text-slate-800 block mb-4">MAR</span>
+                        <p class="text-red-500 font-bold tracking-widest uppercase">El golpe inicial</p>
+                    </div>
+                    
+                    <div class="md:w-2/3">
+                        <h4 class="text-3xl font-bold text-white mb-6 newspaper-font">Marruecos y la herida que despertó al gigante</h4>
+                        <p class="text-slate-400 mb-6 text-lg leading-relaxed">
+                            El debut fue un golpe en la mandíbula, un cachetazo de realidad. Argentina perdió con Marruecos, jugando mal, sin alma, sin ritmo, sin nada. Había más dudas que certezas. Las redes explotaban. La crítica europea se relamía con nuestro dolor.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 gap-4 mb-8">
+                            <div class="bg-black/40 p-4 border-l-2 border-slate-600">
+                                <p class="italic text-slate-300">“No están para competir con nosotros”</p>
+                                <p class="text-xs text-slate-500 mt-1 uppercase font-bold">— Periodista alemán</p>
+                            </div>
+                            <div class="bg-black/40 p-4 border-l-2 border-slate-600">
+                                <p class="italic text-slate-300">“Sudamérica juega a otro ritmo, más lento”</p>
+                                <p class="text-xs text-slate-500 mt-1 uppercase font-bold">— Periodista inglés</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-300 mb-6 font-medium">
+                            Nosotros, curtidos, respondíamos con bronca y sarcasmo.
+                            <span class="text-white italic">“Que sigan hablando, total siempre hablan pavadas”</span>, murmuraban muchos.
+                        </p>
+                        
+                        <div class="bg-slate-800 p-4 rounded text-center">
+                            <p class="text-xl font-bold text-sky-400 newspaper-font italic">“Si no sufrimos, no somos argentinos”.</p>
+                            <p class="text-xs text-slate-500 mt-2 uppercase tracking-wider">Un abuelo en la TV Pública</p>
+                        </div>
+                        <p class="text-slate-400 mt-4">La derrota fue dura, parecia un golpe de realidad. Pero el fútbol, ese viejo compañero nuestro, siempre guarda algo bajo la manga.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="glass-card p-8 md:p-12 rounded-3xl mb-20 reveal relative overflow-hidden group">
+                <div class="relative z-10 flex flex-col md:flex-row-reverse gap-12">
+                    <div class="md:w-1/3 border-l border-slate-800 pl-8 hidden md:block">
+                        <span class="text-8xl font-black text-slate-800 block mb-4">MEX</span>
+                        <p class="text-green-500 font-bold tracking-widest uppercase">El despertar</p>
+                    </div>
+                    
+                    <div class="md:w-2/3">
+                        <h4 class="text-3xl font-bold text-white mb-6 newspaper-font">México y el primer milagro</h4>
+                        <p class="text-slate-400 mb-6 text-lg leading-relaxed">
+                            El segundo partido fue una final adelantada. Contra México, Argentina salió con la soga al cuello, con la obligación de ganar o morir. Perdíamos 1-0 y el país entero estaba paralizado. Hasta que <strong>Messi</strong>, ese hombre al que ya no le quedaba nada por demostrar, metió un tiro libre de novela, de esos que te arrancan un grito que sale de las tripas.
+                        </p>
+                        <p class="text-slate-400 mb-8 text-lg">
+                            Después, el pibe <strong>Franco Mastantuono</strong>, con 18 años y un atrevimiento que solo tienen los que no conocen el miedo, metió una chilena para la eternidad.
+                        </p>
+
+                        <div class="bg-gradient-to-br from-slate-800 to-black p-6 rounded-2xl border border-gold/20 shadow-lg">
+                            <p class="text-white text-lg font-serif italic mb-4">
+                                Pero la verdadera locura vino después: México tuvo un penal en el último segundo. Si lo metían, nos volvíamos a casa.
+                            </p>
+                            <p class="text-2xl font-black text-sky-400 uppercase newspaper-font">
+                                Dibu Martínez voló como si tuviera alas. Atajó. Nos salvó. Nos resucitó.
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-slate-700 text-sm text-slate-500 flex flex-col gap-2">
+                                <span>“Este loco está demente”, deliró un hincha.</span>
+                                <span>“Con el Dibu voy a la guerra”, gritó un pibe con camiseta trucha.</span>
+                                
+                            </div>
+                        </div>
+                        <p class="text-right font-bold text-gold mt-4 text-sm uppercase tracking-widest">Fue el primer milagro</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="glass-card p-8 md:p-12 rounded-3xl mb-20 reveal relative overflow-hidden group border-b-4 border-red-600">
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between mb-8">
+                         <h4 class="text-3xl font-bold text-white newspaper-font">Portugal: La noche en que el destino mostró la camiseta</h4>
+                         <span class="text-4xl font-black text-slate-700">POR</span>
+                    </div>
+
+                    <div class="text-slate-400 text-lg leading-relaxed mb-6">
+                        <p class="mb-4">El partido contra Portugal definía todo. Estábamos virtualmente eliminados porque la diferencia de goles nos mataba. Portugal se clasificaba incluso empatando  0-0 .Era ganar o morir. Y Argentina no encontraba el gol.</p>
+                        <p class="font-bold text-white">Hasta que, en el minuto 94, pasó lo imposible:</p>
+                    </div>
+
+                    <div class="bg-black/30 p-8 rounded-xl border border-slate-700 text-center">
+                        <h3 class="text-2xl font-bold text-white mb-2 uppercase">Dibu Martínez subió a cabecear un córner</h3>
+                        <p class="italic text-slate-400 text-sm mb-6">El arquero más loco del mundo. El arquero más decisivo del mundo.</p>
+                        <div class="text-6xl font-black text-gold animate-pulse mb-4">Y LA METIÓ.</div>
+                        <p class="text-lg font-bold text-white uppercase tracking-widest">DE CABEZA.</p>
+                        <p class="text-sm text-slate-500 mt-2">Como si hubiera nacido para romper la historia.</p>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-slate-800 text-center">
+                        <p class="text-slate-300 text-lg mb-4">
+                            Cristiano Ronaldo quedó tirado en el piso, llorando. Portugal eliminado. Argentina adentro.
+                        </p>
+                        <p class="text-2xl font-serif text-sky-300 italic">“Respeten Los Rangos”, gritaban los hinchas.</p>
+                        <div class="mt-6">
+                             <p class="text-slate-500 text-sm">Un periodista argentino escribió:</p>
+                             <p class="text-gold font-bold text-xl newspaper-font">“Este deporte es hermoso, hermano”.</p>
+                        </div>
+                        <p class="mt-4 text-slate-600 text-xs uppercase tracking-widest">Fue el segundo milagro</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="py-32 bg-slate-100 text-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10 reveal">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-red-600 text-white px-4 py-1 rounded text-xs font-bold uppercase tracking-widest mb-4">El Villano</div>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 newspaper-font text-slate-900">ESPAÑA:<br>LA MÁQUINA PERFECTA,<br>LA SOBERBIA ABSOLUTA</h2>
+                <p class="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto font-serif leading-relaxed">
+                    Mientras tanto, del otro lado del Mundial, España era una picadora de carne. Ganaba todos sus partidos por mas de 3 goles. Yamal estaba endiosado. Tenía 18 años y actuaba como si fuera dueño del planeta.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-7 bg-white p-10 rounded-2xl shadow-2xl border-l-8 border-red-500 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <p class="text-lg text-slate-500 mb-6 italic">
+                        En las celebraciones previas, Lamine posaba con corona de oro, contrataba payasos, bailarinas, enanos, luces láser, DJ, alcohol, todo para su fiesta anticipada.
+                    </p>
+                    <p class="font-bold text-slate-900 mb-2">Su frase recorrió el mundo:</p>
+                    <h3 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-4">
+                        “El Mundial es mío. Ya preparé todo para mi coronación”.
+                    </h3>
+                    <div class="border-t border-slate-100 pt-4 text-sm text-slate-500">
+                        <p>En TyC comentaban:</p>
+                        <p class="italic">“Mirá el nene lo confiado que está”.</p>
+                        <p class="italic">“Ojalá se ahogue con tanta soberbia”, tiró un panelista.</p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 space-y-6">
+                    <div class="bg-slate-200 p-6 rounded-xl">
+                        <h4 class="font-bold text-slate-700 mb-4 border-b border-slate-300 pb-2">Citas de Europa llovían como meteoritos</h4>
+                        <ul class="space-y-4 text-sm text-slate-600">
+                            <li>
+                                <p class="italic">“España ganará sin despeinarse”</p>
+                                <span class="font-bold text-slate-800 uppercase text-xs">— Luis Enrique</span>
+                            </li>
+                            <li>
+                                <p class="italic">“Sudamérica está atrasada tácticamente”</p>
+                                <span class="font-bold text-slate-800 uppercase text-xs">— Owen</span>
+                            </li>
+                            <li>
+                                <p class="italic">“Argentina está tres escalones abajo”</p>
+                                <span class="font-bold text-slate-800 uppercase text-xs">— Klopp</span>
+                            </li>
+                            <li>
+                                <p class="italic">“Yamal es el mejor del mundo y se coronará ahora”</p>
+                                <span class="font-bold text-slate-800 uppercase text-xs">— AS</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-900 text-white p-6 rounded-xl shadow-lg transform translate-x-4 border-l-4 border-sky-400">
+                        <p class="text-sm text-slate-400 uppercase mb-2">De Paul sonrió con bronca:</p>
+                        <p class="text-xl font-bold italic">“Que nos sigan subestimando, nos viene bárbaro… al final, como decía el Diego, que la ch.”**.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-slate-950 text-white relative">
+        <div class="absolute top-0 w-full h-32 bg-gradient-to-b from-slate-100 to-slate-950"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 mt-12 relative z-10">
+            <h2 class="text-center text-5xl md:text-8xl font-black mb-32 newspaper-font tracking-tighter reveal">
+                <span class="text-transparent bg-clip-text bg-gradient-to-b from-sky-500 to-slate-600 block text-2xl md:text-4xl mb-2">FASE ELIMINATORIA</span>
+                ACÁ EMPIEZA LA PELÍCULA
+            </h2>
+
+            <div class="relative space-y-40">
+                <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-slate-800 via-sky-900 to-slate-800 hidden md:block"></div>
+
+                <div class="reveal relative grid md:grid-cols-2 gap-12 items-center">
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 bg-slate-950 border-2 border-sky-500 rounded-full items-center justify-center font-bold text-xs shadow-[0_0_20px_rgba(56,189,248,0.5)]">32avos</div>
+                    
+                    <div class="md:text-right md:pr-16 order-2 md:order-1">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Dieciseisavos</span>
+                        <h3 class="text-4xl font-black text-white mt-2 mb-4 newspaper-font">vs ALEMANIA</h3>
+                        <h4 class="text-red-400 font-bold mb-4">Cuando tocamos fondo para renacer</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Contra Alemania, Argentina vivió media hora de pesadilla. <strong>Íbamos 3-0 abajo antes del minuto 30.</strong> Miles se fueron del estadio. Messi cabizbajo. El país en silencio.
+                        </p>
+                        <div class="mt-4 italic text-slate-500 text-sm">
+                            <p>“Qué bronca, loco”, se escuchaba.</p>
+                            <p>“No sienten la camiseta”, gritaban desde atrás del arco.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:pl-16 order-1 md:order-2">
+                        <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800 hover:border-sky-500 transition-colors duration-300">
+                            <p class="text-gold font-bold uppercase text-sm mb-4">Entonces Scaloni hizo el cambio más polémico del Mundial:</p>
+                            <div class="space-y-2 mb-4 text-sm">
+                                <p class="line-through text-slate-500">Sacó a Messi. Sacó a Julián.</p>
+                                <p class="text-white font-bold">Entraron Thiago Almada y Giuliano Simeone.</p>
+                            </div>
+                            <p class="text-lg font-bold text-white mb-2">Y empezó el milagro número tres.</p>
+                            <p class="text-slate-300 mb-2">Argentina remontó el 0-3. Fue a penales. Y Dibu se convirtió en el dueño del alma alemana.</p>
+                            <div class="text-sky-300 italic text-sm border-t border-slate-700 pt-2 mt-4">
+                                <p>“¿Dónde están? ¡The Mannschaft, The Mannschaft dónde están!”, rugían los hinchas.</p>
+                                <p>“Alemania, decime que se siente .</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal relative grid md:grid-cols-2 gap-12 items-center">
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 bg-slate-950 border-2 border-red-600 rounded-full items-center justify-center font-bold text-xs shadow-[0_0_20px_rgba(220,38,38,0.5)]">8vos</div>
+                    
+                    <div class="md:pr-16 order-2 md:order-1">
+                         <div class="bg-red-950/20 p-8 rounded-2xl border border-red-900/50 md:text-right">
+                            <p class="text-red-500 font-bold uppercase text-xs mb-2">La guerra de Malvinas reencarnada</p>
+                            <p class="text-slate-300 mb-4">Fue la definición más violenta de un Mundial moderno. 300 faltas, tres expulsados por lado, cero tiros al arco. Más boxeo que fútbol.</p>
+                            
+                            <div class="bg-black/50 p-4 rounded inline-block text-left mb-4 border-l-2 border-red-500">
+                                <p class="text-xs text-slate-500 uppercase">Paredes explotó cuando Harry Kane le susurró:</p>
+                                <p class="text-white italic text-sm">“Ayer me acosté con tu esposa”.</p>
+                            </div>
+                            <p class="text-slate-300 text-sm mb-2">Hubo empujones, caos, puteadas.</p>
+                            <p class="text-white font-bold text-sm">Dibu, desencajado, le dio una cachetada a Kane. Expulsado.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:pl-16 order-1 md:order-2">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Octavos</span>
+                        <h3 class="text-4xl font-black text-white mt-2 mb-4 newspaper-font">vs INGLATERRA</h3>
+                        <p class="text-slate-300 mb-4">Rulli tuvo que entrar para los penales.</p>
+                        <p class="text-3xl font-black text-white">ATAJÓ DOS.</p>
+                        <p class="text-3xl font-black text-sky-400">ARGENTINA ADENTRO.</p>
+                        <div class="mt-4 border-l-2 border-sky-400 pl-4">
+                            <p class="text-sm text-slate-400 italic">La cancha se llenó de argentinos llorando y cantando:</p>
+                          <p class="text-white font-bold text-sm">“Por los pibes que nos miran desde el cielo”.</p>
+                            <p class="text-white font-bold text-sm">“Acá se juega con el corazón en la mano”.</p>
+                            <p class="text-white font-bold text-sm">“No existe rival cuando juega la Argentina”.</p>
+                            <p class="text-white font-bold text-sm">“Por la camiseta, por la historia, por todos”.</p>
+                            <p class="text-white font-bold text-sm">“En las guerras y en los Mundiales, Argentina resiste”.</p>
+                            <p class="text-white font-bold text-sm">“Aunque duela, aunque cueste: somos Argentina”.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal relative grid md:grid-cols-2 gap-12 items-center">
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 bg-slate-950 border-2 border-green-500 rounded-full items-center justify-center font-bold text-xs shadow-[0_0_20px_rgba(34,197,94,0.5)]">4tos</div>
+                    
+                    <div class="md:text-right md:pr-16 order-2 md:order-1">
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Cuartos</span>
+                        <h3 class="text-4xl font-black text-white mt-2 mb-4 newspaper-font">vs BRASIL</h3>
+                        <h4 class="text-green-400 font-bold mb-4">El milagro más grande de todos</h4>
+                        <p class="text-slate-300 mb-2">Brasil dominó el 95% del partido: 40 tiros, 8 palos, 80% de posesión.</p>
+                        <p class="text-white font-bold mb-4">Pero la pelota no entraba.</p>
+                        <div class="text-slate-400 italic text-sm">
+                            <p>“Es Maradona, te lo digo en serio”, dijo un relator.</p>
+                            <p>“Estos muchachos están tocados por la mano de Dios”, agregó otro.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:pl-16 order-1 md:order-2">
+                        <div class="bg-slate-900 p-8 rounded-2xl border-l-4 border-green-500">
+                            <p class="text-slate-300 text-sm mb-4">Un hincha invadió la cancha y le gritó a Scaloni: <strong class="text-white">“¡Poné a Garnacho, lo soñé!”</strong>. Scaloni lo hizo no tenia ya nada que perder, era un baile una Sandunga.</p>
+                            <div class="border-t border-slate-800 pt-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-green-500 font-bold text-xs uppercase">Min 90+8</span>
+                                </div>
+                                <p class="text-lg font-serif text-white italic">
+                                    Tras un penal fallado por Vinicius, Garnacho corrió, gambeteó a seis jugadores y metió el <strong>gol del siglo II</strong>.
+                                </p>
+                                <p class="text-xs text-slate-500 mt-2 italic">“Naaaa tremendo lo de este pibe”. “Esto no es fútbol, esto es destino”.</p>
+                            </div>
+                            <br>
+                              <strong class="text-white">Scaloni salió corriendo hacia la tribuna para abrazar al fanático que había anticipado el milagro</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal relative grid md:grid-cols-2 gap-12 items-center">
+                    <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 bg-slate-950 border-2 border-blue-600 rounded-full items-center justify-center font-bold text-xs shadow-[0_0_20px_rgba(37,99,235,0.5)]">Semis</div>
+                    
+                    <div class="md:pr-16 order-2 md:order-1">
+                        <div class="bg-blue-950/20 p-8 rounded-2xl border border-blue-900/50 md:text-right">
+                             <p class="text-blue-500 font-bold uppercase text-xs mb-2">El partido que se convirtió en caos social</p>
+                             <p class="text-slate-300 mb-2">La reedición de la final del 2022 fue un volcán. Messi brillante. Mbappé intratable.</p>
+                             <p class="text-sm text-slate-400">Messi se lesionó al 70. Entró Paredes. Al 75, choque entre Paredes y Mbappé.</p>
+                             <p class="text-white font-bold my-2">Avalancha. Puñetazos entre jugadores. Insultos de la tribuna.</p>
+                             <div class="bg-black/50 p-3 rounded text-sm text-slate-300 inline-block mb-2">
+                                 Desde la platea bajó el canto más polémico: <span class="italic text-white">“Juegan en Francia, pero son todos de Angola”.</span>
+                             </div>
+                             <p class="text-xs text-red-400 font-bold uppercase">El partido se suspendió 2 horas por incidentes raciales.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:pl-16 order-1 md:order-2">
+                         <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Semifinal</span>
+                        <h3 class="text-4xl font-black text-white mt-2 mb-4 newspaper-font">vs FRANCIA</h3>
+                        <p class="text-slate-300 mb-4">Al volver, Argentina metió un penal. Mbappé empató en el 90.</p>
+                        
+                        <div class="pl-4 border-l-4 border-gold">
+                            <p class="text-2xl font-black text-white">PENALES OTRA VEZ.</p>
+                            <p class="text-2xl font-black text-sky-400">DIBU EN MODO DEMONIO.</p>
+                            <p class="text-2xl font-black text-white">ARGENTINA A LA FINAL.</p>
+                        </div>
+                        
+                        <div class="mt-6 text-sm text-slate-500 italic">
+                            <p>“No jugamos lindo, jugamos a lo argentino”, dijo Scaloni.</p>
+                            <p>“A nosotros nos mata la estética, pero ganamos igual”, dijo Romero.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-40 bg-gradient-to-br from-sky-950 via-slate-950 to-black text-white relative overflow-hidden border-t-8 border-gold">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 animate-pulse"></div>
+        <div class="absolute top-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-20 reveal">
+            <div class="text-center mb-24">
+                <div class="inline-flex items-center gap-4 text-gold mb-6">
+                    <div class="h-[1px] w-12 bg-gold"></div>
+                    <span class="uppercase tracking-[0.4em] text-sm font-bold">La Final del Siglo</span>
+                    <div class="h-[1px] w-12 bg-gold"></div>
+                </div>
+                <h1 class="text-7xl md:text-[8rem] font-black newspaper-font leading-none mb-6 drop-shadow-[0_0_50px_rgba(251,191,36,0.3)]">
+                    ARGENTINA<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-sky-300">CAMPEÓN</span>
+                </h1>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="space-y-8 text-lg text-slate-300 leading-relaxed text-justify">
+                    <h3 class="text-3xl font-bold text-white newspaper-font mb-6 border-b border-slate-800 pb-4">España vs Argentina: cuando el fútbol eligió al corazón</h3>
+                    <p>
+                        España llegaba invicta, sin recibir goles, jugando a otro deporte. Yamal era tratado como un Dios. Había preparado la fiesta del siglo con bailarinas, enanos, alcohol, DJ, payasos, corona, trono dorado.
+                    </p>
+                    <div class="bg-black/30 p-4 rounded border-l-2 border-red-500 text-sm">
+                        <p class="font-bold text-red-400 mb-2">Europa repetía:</p>
+                        <ul class="space-y-1 italic text-slate-400">
+                            <li>“España es superior en todo” — Guardiola</li>
+                            <li>“Argentina no tiene chances” — Kroos</li>
+                            <li>“Los europeos están en otra galaxia” — Ferdinand</li>
+                        </ul>
+                    </div>
+                    <p>
+                        Argentina no podía llevar hinchas por sanción. Pero los argentinos igualmente invadieron el estadio rompiendo puertas.
+                        <br><span class="text-sky-300 font-bold">“Si hay bandera argentina, hay fiesta”. “No permitiremos que nos prohiban nuestra unica alegria.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-b from-slate-900 to-black p-10 rounded-[2rem] border border-gold/30 shadow-[0_0_100px_rgba(251,191,36,0.15)] relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')] opacity-5"></div>
+                    
+                    <div class="relative z-10 text-center">
+                                                    <p class="text-white mb-6">
+                                El partido fue parejo. España metió 3 goles:
+                                <strong class="text-red-500">todos anulados</strong>.
+                                Morata los celebró como si ya fuera campeón,
+                                levantando los brazos y gritando hacia la tribuna,
+                                <strong class="text-red-500">pero la ilusión le duró poco</strong>:
+                                los tres estaban en <strong class="text-red-500">fuera de juego</strong>.
+                                Argentina, mientras tanto, tuvo chispazos.
+                            </p>
+
+                            <p class="text-sm text-slate-400 italic mb-8">
+                                “Estamos vivos, che”, dijo De Paul. “Si llegamos hasta acá, es por algo”, dijo Otamendi.
+                            </p>
+
+                        
+                        <p class="text-red-500 font-black tracking-[0.3em] text-sm mb-8 animate-pulse">MINUTO 120 • ÚLTIMA JUGADA</p>
+                        
+                        <div class="space-y-4 font-serif text-2xl text-white mb-10">
+                            <p class="opacity-60">Messi, infiltrado y roto, tomó la pelota.</p>
+                            <p class="opacity-80">Gambeta. Amague. Pausa.</p>
+                            <div class="py-4 transform scale-125">
+                                <span class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-200 to-gold drop-shadow-lg">MAGIA.</span>
+                            </div>
+                            <p>Golazo al ángulo.</p>
+                            <p class="font-black text-4xl">GOL.</p>
+                        </div>
+                        
+                        <h4 class="text-xl font-bold uppercase text-white tracking-widest mb-2">El gol del siglo</h4>
+                        <p class="text-gold font-bold">Argentina Campeón del Mundo.</p>
+                        <p class="text-xs text-slate-500 uppercase mt-1">Por cuarta vez. Segunda consecutiva.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-32 text-center max-w-4xl mx-auto">
+                <div class="bg-white/5 backdrop-blur-sm p-12 rounded-3xl border border-white/10 mb-12 transform hover:scale-105 transition-transform duration-500 cursor-default">
+                    <p class="text-slate-400 mb-8 text-lg">Yamal quedó destruido, llorando como Baggio en USA 94. La fiesta española quedó intacta, sin estrenar.</p>
+                    <p class="text-4xl md:text-6xl font-serif font-black italic text-gold newspaper-font leading-tight">
+                        "Messi levantó la Copa.<br>Roto. Infiltrado. Eterno."
+                    </p>
+                </div>
+
+                <div class="quote-box text-xl md:text-2xl">
+                    <p class="mb-4 text-slate-500 text-sm uppercase font-bold">Luis de la Fuente (DT España) lo dijo todo:</p>
+                    <p class="text-white font-serif">“Argentina no era favorita porque Scaloni no renovó el plantel y llevó casi a los mismos del 2022… pero estos tipos tienen algo que no se entrena”.</p>
+                </div>
+                
+                <p class="text-2xl md:text-3xl font-black text-sky-400 newspaper-font uppercase tracking-wide pt-12 border-t border-slate-800">
+                    Y así se escribió la hazaña más argentina de la historia del fútbol.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-slate-600 py-20 text-center border-t border-slate-900 relative z-20">
+        <div class="flex justify-center gap-6 mb-6">
+            <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <svg class="w-8 h-8 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+        </div>
+        <p class="text-sm tracking-widest uppercase mb-2">Fernando Javier Vega Sabino </p>
+        <p class="text-xs text-slate-800">000501008</p>
+    </footer>
+
+    <script>
+        // Animación al hacer scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        // Barra de progreso y confeti
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+            
+            // Trigger confeti al final
+            if (scrolled > 95) {
+                createConfetti();
+            }
+        };
+
+        // Función confeti sin emojis (rectángulos de colores)
+        function createConfetti() {
+            const colors = ['#fbbf24', '#38bdf8', '#ffffff'];
+            if(document.querySelectorAll('.confetti').length > 50) return; 
+            
+            for(let i=0; i<5; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                // Rotación aleatoria inicial
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+    </script>
+</body>
+</html>
+<script>
+    // Cargar API de YouTube
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    var isMuted = false;
+
+    // API lista → crea reproductor oculto
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-audio', {
+            height: '0',
+            width: '0',
+            videoId: 'RRkyvSDpKQQ', // Video de La Mosca
+            playerVars: {
+                'autoplay': 0,     // No autoplay directo
+                'controls': 0,
+                'loop': 1,
+                'playlist': 'RRkyvSDpKQQ',
+                'showinfo': 0,
+                'modestbranding': 1
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // El reproductor está listo, pero no puede reproducir aún
+    }
+
+    // ---- INICIAR EXPERIENCIA ----
+    function startExperience() {
+        const overlay = document.getElementById('intro-overlay');
+        const controls = document.getElementById('music-control');
+
+        // Animación para quitar overlay
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            controls.classList.remove('hidden');
+
+            setTimeout(() => {
+                controls.classList.remove('opacity-0', 'translate-y-10');
+            }, 100);
+
+        }, 1000);
+
+        // Reproducir música (muted autoplay → permitido en Render)
+        setTimeout(() => {
+            if (player && player.playVideo) {
+                player.mute();        // OBLIGATORIO PARA PERMITIR AUTOPLAY
+                player.setVolume(30); // Volumen cuando lo desmutees
+                player.playVideo();   // Ahora sí reproduce
+                isMuted = true;       // Estado actual: está silenciado
+            }
+        }, 300); // Delay evita bloqueos en Render
+    }
+
+    // ---- BOTÓN PARA ACTIVAR/DESACTIVAR SONIDO ----
+    function toggleAudio() {
+        const iconOn = document.getElementById('icon-on');
+        const iconOff = document.getElementById('icon-off');
+
+        if (isMuted) {
+            // Activar sonido
+            player.unMute();
+            iconOn.classList.remove('hidden');
+            iconOff.classList.add('hidden');
+            isMuted = false;
+        } else {
+            // Silenciar sonido
+            player.mute();
+            iconOn.classList.add('hidden');
+            iconOff.classList.remove('hidden');
+            isMuted = true;
+        }
+    }
+</script>
