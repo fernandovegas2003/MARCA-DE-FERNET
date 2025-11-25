@@ -410,83 +410,116 @@
         </button>
     </div>
 
-    <script>
-        // Reveal on Scroll
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 120;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+   <script>
+    // Reveal on Scroll
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 120;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
             }
         }
-        window.addEventListener("scroll", reveal);
+    }
+    window.addEventListener("scroll", reveal);
 
-        // Progress Bar
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-            
-            // Efecto Parallax en el anillo (Sutil rotación)
-            var ring = document.querySelector('.fernet-ring');
-            if(ring) {
-                ring.style.transform = `translate(-50%, -50%) rotate(${scrolled * 2}deg)`;
-            }
-        };
-
-        // YouTube Audio Setup
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var isMuted = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-audio', {
-                height: '0',
-                width: '0',
-                videoId: '4y33h81phKU', // Interstellar Theme (Piano) - Muy emotivo
-                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': '4y33h81phKU' },
-                events: { 'onReady': onPlayerReady }
-            });
+    // Progress Bar
+    window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("progress-bar").style.width = scrolled + "%";
+        
+        // Efecto Parallax en el anillo (Sutil rotación)
+        var ring = document.querySelector('.fernet-ring');
+        if(ring) {
+            ring.style.transform = `translate(-50%, -50%) rotate(${scrolled * 2}deg)`;
         }
-        function onPlayerReady(event) {}
+    };
 
-        // Iniciar Experiencia
-        function startExperience() {
-            const intro = document.getElementById('intro-screen');
-            const controls = document.getElementById('music-control');
-            
-            // Fade out intro
-            intro.style.opacity = '0';
-            setTimeout(() => {
-                intro.style.display = 'none';
-                // Mostrar controles
-                controls.classList.remove('hidden');
-                setTimeout(() => { controls.classList.remove('opacity-0', 'translate-y-10'); }, 100);
-            }, 1500);
+    // YouTube Audio Setup
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-            // Play Music
-            if(player && player.playVideo) { 
-                player.setVolume(50); 
-                player.playVideo(); 
-            }
+    var player;
+    var isMuted = false;
+    var shouldPlayMusic = false; // <- para saber si el usuario ya pidió música
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-audio', {
+            height: '0',
+            width: '0',
+            videoId: '4y33h81phKU', // Interstellar Theme (Piano)
+            playerVars: { 
+                'autoplay': 0, 
+                'controls': 0, 
+                'loop': 1, 
+                'playlist': '4y33h81phKU' 
+            },
+            events: { 'onReady': onPlayerReady }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Si el usuario ya hizo clic en "Ingresar", empieza la música cuando el player esté listo
+        if (shouldPlayMusic) {
+            player.setVolume(50);
+            player.unMute();
+            player.playVideo();
         }
+    }
 
-        // Toggle Audio
-        function toggleAudio() {
-            const iconOn = document.getElementById('icon-on');
-            const iconOff = document.getElementById('icon-off');
-            if (isMuted) { player.unMute(); iconOn.classList.remove('hidden'); iconOff.classList.add('hidden'); isMuted = false; } 
-            else { player.mute(); iconOn.classList.add('hidden'); iconOff.classList.remove('hidden'); isMuted = true; }
+    // Iniciar Experiencia
+    function startExperience() {
+        const intro = document.getElementById('intro-screen');
+        const controls = document.getElementById('music-control');
+        
+        // Marcamos que el usuario ya interactuó y quiere música
+        shouldPlayMusic = true;
+
+        // Fade out intro
+        intro.style.opacity = '0';
+        setTimeout(() => {
+            intro.style.display = 'none';
+            // Mostrar controles
+            controls.classList.remove('hidden');
+            setTimeout(() => { 
+                controls.classList.remove('opacity-0', 'translate-y-10'); 
+            }, 100);
+        }, 1500);
+
+        // Si el player ya está listo, arranca de una vez
+        if (player && player.playVideo) { 
+            player.setVolume(50); 
+            player.unMute();
+            player.playVideo(); 
         }
-    </script>
+    }
+
+    // Toggle Audio
+    function toggleAudio() {
+        const iconOn = document.getElementById('icon-on');
+        const iconOff = document.getElementById('icon-off');
+
+        if (!player) return;
+
+        if (isMuted) { 
+            player.unMute(); 
+            iconOn.classList.remove('hidden'); 
+            iconOff.classList.add('hidden'); 
+            isMuted = false; 
+        } else { 
+            player.mute(); 
+            iconOn.classList.add('hidden'); 
+            iconOff.classList.remove('hidden'); 
+            isMuted = true; 
+        }
+    }
+</script>
+
 </body>
 </html>
